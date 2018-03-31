@@ -26,6 +26,25 @@ sigma_estimation=function(y,autoreg_w,autoreg_residual){
   }
 }
 
+miu_estimation=function(y,x,sigma){
+  
+  miu=matrix(0,nrow=2,ncol=1)
+  sigma2=matrix(1,nrow=2,ncol=2)
+  
+  
+
+    miu=solve(diag(2)+(t(x)%*%x)/sigma[i,]^2)%*%((t(x)%*%y)/sigma[i,]^2)
+    sigma2[i,]=solve(diag(2)+(t(x)%*%x)/sigma[i,]^2)
+    
+    factor_miu=as.matrix(mvrnorm(1,mu=miu,Sigma =sigma2))
+    
+    
+    return(factor_miu)
+  
+}
+  
+
+
 transition_p=function(state_value){
   
   p_miu=matrix(0,nrow=2,ncol=2)
